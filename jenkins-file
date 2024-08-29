@@ -1,0 +1,30 @@
+pipeline {
+    agent{
+        node{
+            label 'dev'
+        }
+    }
+        stages{
+            
+            stage('run'){
+                steps{
+                    echo 'stage 3 now run the build image in container'
+                    sh 'docker compose up -d'
+                    echo 'application running successfully.'
+                }
+            }
+            stage('push to hub'){
+                steps{
+                     withCredentials(
+                         [usernamePassword(
+                             credentialsId: 'doc-cred', 
+                             usernameVariable: 'USER', 
+                             passwordVariable: 'PASS')]
+                         )
+                        echo 'the username is $(env.USER)'
+                        echo 'THE PASSWORD IS $(env.PASS)'
+                     
+                }
+            }
+        }
+}
