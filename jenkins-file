@@ -8,7 +8,7 @@ pipeline {
             
             stage('run'){
                 steps{
-                    echo 'stage 3 now run the build image in container'
+                    echo 'stage 3 the build image in container'
 
                     echo 'application running successfully.'
                 }
